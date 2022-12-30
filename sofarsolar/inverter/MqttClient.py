@@ -152,4 +152,4 @@ class MqttClient(object):
 
 if __name__ == '__main__':
     for k in InverterMsg.InverterMsg(None).dict().keys():
-        print k
+        print(k)
