@@ -8,10 +8,6 @@ class DNSQuery:
         self.data = data
         self.domain = ''
 
-        self.log.info('[FakeDNS] test1: %s' % self.data)
-        self.log.info('[FakeDNS] test2: %s' % self.data[2])
-        self.log.info('[FakeDNS] test2: %s' % self.data[2].decode())
-        
         tipo = (ord(data[2]) >> 3) & 15  # Opcode bits
         if tipo == 0:  # Standard query
             ini = 12
@@ -59,6 +55,9 @@ class FakeDNS(object):
         while self.started:
             try:
                 data, addr = self.udps.recvfrom(1024)
+                self.log.info('[FakeDNS] test1: %s' % data)
+                self.log.info('[FakeDNS] test2: %s' % data[2])
+                self.log.info('[FakeDNS] test2: %s' % data[2].decode())
                 p = DNSQuery(data)
                 self.udps.sendto(p.response(self.ip), addr)
                 self.last_domain = p.domain
