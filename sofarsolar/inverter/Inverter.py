@@ -5,9 +5,6 @@ import FakeDNS
 import os
 import sys
 import site
-site.addsitedir('/usr/lib/python3.10/')
-site.addsitedir('/usr/lib/python3.10/site-packages')
-site.addsitedir('/usr/lib/python3.10/lib-dynload')
 import MqttClient2
 import logging
 import json
@@ -57,7 +54,7 @@ def main():
     logger.debug("[Inverter] Config: %s" % pp.pformat(config))
 
     fake_dns = FakeDNS.FakeDNS(logger, config)
-    mqtt_client = MqttClient.MqttClient(logger, config)
+    mqtt_client = MqttClient2.MqttClient2(logger, config)
     tcp_proxy = TcpProxy.TcpProxy(config, logger, fake_dns, create_callback(logger, mqtt_client))
     try:
         mqtt_client.start()
