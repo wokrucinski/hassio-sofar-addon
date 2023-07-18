@@ -13,7 +13,7 @@ class DNSQuery:
             ini = 12
             lon = data[ini]
             while lon != 0:
-                self.domain += data[ini + 1:ini + lon + 1]
+                self.domain += str(data[ini + 1:ini + lon + 1] + '.')
                 ini += lon + 1
                 lon = data[ini]
 
