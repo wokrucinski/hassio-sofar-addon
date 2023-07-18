@@ -13,16 +13,16 @@ class DNSQuery:
             ini = 12
             lon = data[ini]
             while lon != 0:
-                self.domain += str(data[ini + 1:ini + lon + 1] + '.')
+                self.domain += str(data[ini + 1:ini + lon + 1]) + '.'
                 ini += lon + 1
                 lon = data[ini]
 
     def response(self, ip):
         packet = ''
         if self.domain:
-            packet += self.data[:2] + "\x81\x80"
-            packet += self.data[4:6] + self.data[4:6] + '\x00\x00\x00\x00'  # Questions and Answers Counts
-            packet += self.data[12:]  # Original Domain Name Question
+            packet += str(self.data[:2]) + "\x81\x80"
+            packet += str(self.data[4:6]) + str(self.data[4:6]) + '\x00\x00\x00\x00'  # Questions and Answers Counts
+            packet += str(self.data[12:])  # Original Domain Name Question
             packet += '\xc0\x0c'  # Pointer to domain name
             packet += '\x00\x01\x00\x01\x00\x00\x00\x3c\x00\x04'  # Response type, ttl and resource data length -> 4 bytes
             packet += str.join('', map(lambda x: chr(int(x)), ip.split('.')))  # 4bytes of IP
