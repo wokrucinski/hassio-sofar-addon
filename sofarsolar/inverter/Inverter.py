@@ -4,7 +4,7 @@ import InverterMsg
 import FakeDNS
 import os
 import sys
-import MqttClient
+import MqttClient2
 import logging
 import json
 import anyconfig
