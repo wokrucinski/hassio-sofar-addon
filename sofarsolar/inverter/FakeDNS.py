@@ -57,7 +57,6 @@ class FakeDNS(object):
                 data, addr = self.udps.recvfrom(1024)
                 self.log.info('[FakeDNS] test1: %s' % data)
                 self.log.info('[FakeDNS] test2: %s' % data[2])
-                self.log.info('[FakeDNS] test2: %s' % data[2].decode())
                 p = DNSQuery(data)
                 self.udps.sendto(p.response(self.ip), addr)
                 self.last_domain = p.domain
