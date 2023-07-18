@@ -6,27 +6,20 @@ import threading
 class DNSQuery:
     def __init__(self, data):
         self.data = data
-        self.domain = ''
+        self.domain = 'data1.solarmanpv.com'
 
         tipo = (data[2] >> 3) & 15  # Opcode bits
-        if tipo == 0:  # Standard query
-            ini = 12
-            lon = data[ini]
-            while lon != 0:
-                self.domain += str(data[ini + 1:ini + lon + 1]) + '.'
-                ini += lon + 1
-                lon = data[ini]
 
     def response(self, ip):
         packet = ''
         if self.domain:
-            packet += str(self.data[:2]) + "\x81\x80"
-            packet += str(self.data[4:6]) + str(self.data[4:6]) + '\x00\x00\x00\x00'  # Questions and Answers Counts
-            packet += str(self.data[12:])  # Original Domain Name Question
-            packet += '\xc0\x0c'  # Pointer to domain name
-            packet += '\x00\x01\x00\x01\x00\x00\x00\x3c\x00\x04'  # Response type, ttl and resource data length -> 4 bytes
+            packet += "x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x05data1\nsolarmanpv\x03com\x00\x00\x01\x00\x01\x81\x80"
+            packet += "x00\x01\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"  # Questions and Answers Counts
+            packet += "x05data1\nsolarmanpv\x03com\x00\x00\x01\x00\x01"  # Original Domain Name Question
+            packet += "\xc0\x0c"  # Pointer to domain name
+            packet += "\x00\x01\x00\x01\x00\x00\x00\x3c\x00\x04"  # Response type, ttl and resource data length -> 4 bytes
             packet += str.join('', map(lambda x: chr(int(x)), ip.split('.')))  # 4bytes of IP
-        return packet
+        return bytes(packet,'utf-8')
 
 
 class FakeDNS(object):
