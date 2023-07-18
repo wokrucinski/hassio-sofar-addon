@@ -8,14 +8,14 @@ class DNSQuery:
         self.data = data
         self.domain = ''
 
-        tipo = (ord(data[2]) >> 3) & 15  # Opcode bits
+        tipo = (data[2] >> 3) & 15  # Opcode bits
         if tipo == 0:  # Standard query
             ini = 12
-            lon = ord(data[ini])
+            lon = data[ini]
             while lon != 0:
                 self.domain += data[ini + 1:ini + lon + 1] + '.'
                 ini += lon + 1
-                lon = ord(data[ini])
+                lon = data[ini]
 
     def response(self, ip):
         packet = ''
