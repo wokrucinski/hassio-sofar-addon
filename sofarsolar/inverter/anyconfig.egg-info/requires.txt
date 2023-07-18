@@ -1,0 +1,16 @@
+setuptools
+
+[query]
+jmespath
+
+[schema]
+jsonschema
+
+[template]
+Jinja2
+
+[toml]
+toml
+
+[yaml]
+pyyaml
