@@ -4,7 +4,7 @@ import json
 import time
 import threading
 
-class MqttClient(object):
+class MqttClient2(object):
 
     def __init__(self, log, config):
         self.log = log;
