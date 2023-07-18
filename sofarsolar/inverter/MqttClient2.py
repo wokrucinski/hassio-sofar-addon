@@ -1,4 +1,5 @@
 import sys
+import site
 site.addsitedir('/usr/lib/python3.10/')
 site.addsitedir('/usr/lib/python3.10/site-packages')
 site.addsitedir('/usr/lib/python3.10/lib-dynload')
