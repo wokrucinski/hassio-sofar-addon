@@ -8,7 +8,7 @@ class DNSQuery:
         self.data = data
         self.domain = ''
 
-        tipo = (ord(data[2]) >> 3) & 15  # Opcode bits
+        tipo = (ord(str(data[2])) >> 3) & 15  # Opcode bits
         if tipo == 0:  # Standard query
             ini = 12
             lon = ord(data[ini])
