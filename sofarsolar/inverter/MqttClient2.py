@@ -1,4 +1,5 @@
 import sys
+print(sys.path)
 import paho.mqtt.client as mqtt
 import InverterMsg
 import json
