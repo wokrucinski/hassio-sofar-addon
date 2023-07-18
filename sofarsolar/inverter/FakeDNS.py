@@ -8,7 +8,11 @@ class DNSQuery:
         self.data = data
         self.domain = ''
 
-        tipo = (ord(str(data[2])) >> 3) & 15  # Opcode bits
+        self.log.info('[FakeDNS] test1: %s' % self.data)
+        self.log.info('[FakeDNS] test2: %s' % self.data[2])
+        self.log.info('[FakeDNS] test2: %s' % self.data[2].decode())
+        
+        tipo = (ord(data[2]) >> 3) & 15  # Opcode bits
         if tipo == 0:  # Standard query
             ini = 12
             lon = ord(data[ini])
